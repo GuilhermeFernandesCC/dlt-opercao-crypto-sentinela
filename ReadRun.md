@@ -1,0 +1,1 @@
+genIdentidade.py -> Gera identidade e publica
