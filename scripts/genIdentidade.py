@@ -54,7 +54,7 @@ def publicar_identidade_mqtt(id_unidade, pub_rsa_b64, pub_ecdsa_b64):
     mensagem = {
         "id_unidade": id_unidade,
         "chave_publica_rsa": pub_rsa_b64,
-        "chave_publica_eddsa": pub_ecdsa_b64
+        "chave_publica_ecdsa": pub_ecdsa_b64
     }
     print(mensagem)
     cliente = mqtt.Client()

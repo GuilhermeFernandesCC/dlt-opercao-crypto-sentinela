@@ -6,6 +6,7 @@ TOPICOS = [
     "ufcg/cc/dlt/menssagens",
     "ufcg/cc/dlt/chaves/+",
     "sisdef/broadcast/chaves/+",
+    "sisdef/direto/ut-foxtrot",
 ]
 
 # --- Funções de Callback ---
