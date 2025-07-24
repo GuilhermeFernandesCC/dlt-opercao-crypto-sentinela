@@ -37,17 +37,23 @@ def get_public_key(destinatario):
     except Exception as e:
         print('Destinatário não pertence a chaves confiadas')
 
-
+def carregar_chave_b64(b64_str):
+    key_bytes = base64.b64decode(b64_str)
+    return serialization.load_der_public_key(key_bytes)
 
 def enviar_mensagem_segura(destinatario,conteudo):
     TOPIC = f'sisdef/direto/{destinatario}'
     BROKER_ADDRESS = "test.mosquitto.org"
     # Chaves destinatário
-    chave_rsa_pub_destinatario,chave_rsa_pub_destinatario = get_public_key(destinatario)
+    chave_rsa_pub_destinatario,chave_ecdsa_pub_destinatario = get_public_key(destinatario)
     # Chave Remetente
     with open('./scripts/chave_ut_foxtrot.json','r') as f:
         chave_rsa_priv_remetente = json.load(f)['ecdsa']['private_key']
-
+    
+    chave_rsa_pub_destinatario = carregar_chave_b64(chave_rsa_pub_destinatario)
+    chave_ecdsa_pub_destinatario = carregar_chave_b64(chave_ecdsa_pub_destinatario)
+    chave_rsa_priv_remetente = carregar_chave_b64(chave_rsa_priv_remetente)
+    
     mensagem_segura = fc.criar_mensagem_segura(conteudo,chave_rsa_pub_destinatario,chave_rsa_priv_remetente)
     
     client = mqtt.Client()
