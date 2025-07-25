@@ -77,13 +77,6 @@ def on_message(client, userdata, msg):
         assinatura = base64.b64decode(pacote["assinatura_b64"])
         remetente = pacote["remetente"].lower()
 
-        print("Remetente:", remetente)
-        print("B64 - chave_sessao_cifrada:", pacote["chave_sessao_cifrada_b64"])
-        print("B64 - nonce:", pacote["nonce_b64"])
-        print("B64 - tag:", pacote["tag_autenticacao_b64"])
-        print("B64 - ciphertext:", pacote["ciphertext_b64"])
-        print("B64 - assinatura:", pacote["assinatura_b64"])
-
         # Passo 2 - Descriptografar chave de sessão
         chave_privada_rsa = carregar_chave_privada_rsa_de_json()
         try:
@@ -91,13 +84,6 @@ def on_message(client, userdata, msg):
         except ValueError as e:
             print("Erro ao descriptografar chave de sessão:", e)
             print("Possível chave corrompida ou mal direcionada.")
-
-        print("Chave privada RSA (pedaço):")
-        print(chave_privada_rsa.private_bytes(
-            serialization.Encoding.PEM,
-            serialization.PrivateFormat.PKCS8,
-            serialization.NoEncryption()
-        ).decode()[:100])
 
         print("Mensagem diz ser de:", remetente)
         # Passo 3 - Descriptografar a mensagem com AES-GCM
