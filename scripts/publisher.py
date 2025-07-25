@@ -18,7 +18,7 @@ def enviar_echo():
 
     client.loop_start()
     client.publish(TOPIC, payload=echo)
-    time.sleep(1) # garanir que a menssagem seja publicada
+    time.sleep(1) # garantir que a menssagem seja publicada
 
     client.loop_stop() #desconexao
     client.disconnect()
@@ -31,35 +31,40 @@ def get_public_key(destinatario):
 
     try: 
         chaves_dest = chaves_confiadas[destinatario]
-        chave_publica_rsa = chaves_dest['chave_publica_rsa']
-        chave_publica_ecdsa = chaves_dest['chave_publica_ecdsa']
-        return chave_publica_rsa,chave_publica_ecdsa
+        return chaves_dest['chave_publica_rsa'],chaves_dest['chave_publica_ecdsa']
     except Exception as e:
         print('Destinatário não pertence a chaves confiadas')
-
-def carregar_chave_b64(b64_str):
-    key_bytes = base64.b64decode(b64_str)
-    return serialization.load_der_public_key(key_bytes)
+        return None,None
 
 def enviar_mensagem_segura(destinatario,conteudo):
     TOPIC = f'sisdef/direto/{destinatario}'
     BROKER_ADDRESS = "test.mosquitto.org"
+
     # Chaves destinatário
     chave_rsa_pub_destinatario,chave_ecdsa_pub_destinatario = get_public_key(destinatario)
+    
+    if not chave_rsa_pub_destinatario:
+        return
+    
+    chave_rsa_pub_destinatario = fc.carregar_chave_publica_b64(chave_rsa_pub_destinatario)
+    chave_ecdsa_pub_destinatario = fc.carregar_chave_publica_b64(chave_ecdsa_pub_destinatario)
+
     # Chave Remetente
     with open('./scripts/chave_ut_foxtrot.json','r') as f:
-        chave_rsa_priv_remetente = json.load(f)['ecdsa']['private_key']
+        chave_ecdsa_priv_remetente = json.load(f)['ecdsa']['private_key']
+        chave_ecdsa_priv_remetente = fc.carregar_chave_privada_b64(chave_ecdsa_priv_remetente)
+
     
-    chave_rsa_pub_destinatario = carregar_chave_b64(chave_rsa_pub_destinatario)
-    chave_ecdsa_pub_destinatario = carregar_chave_b64(chave_ecdsa_pub_destinatario)
-    chave_rsa_priv_remetente = carregar_chave_b64(chave_rsa_priv_remetente)
-    
-    mensagem_segura = fc.criar_mensagem_segura(conteudo,chave_rsa_pub_destinatario,chave_rsa_priv_remetente)
+    mensagem_segura = fc.criar_mensagem_segura(
+        conteudo,
+        chave_rsa_pub_destinatario,
+        chave_ecdsa_priv_remetente)
     
     client = mqtt.Client()
     client.connect(BROKER_ADDRESS, 1883, 60)
     client.loop_start()
-    client.publish(TOPIC, json.dumps(mensagem_segura))
+    client.publish(TOPIC, payload=json.dumps(mensagem_segura))
+    time.sleep(1) # Garantir Publicação
     client.loop_stop()
     client.disconnect()
 
@@ -67,10 +72,8 @@ print('### Mensagem Segura ###')
 dest = input('id destino: ')
 msg = input('Mensagem: ')
 enviar_mensagem_segura(dest,msg)
-'''
 try:
     
     print("### Mensagem Enviada ###")
 except Exception as e:
     print("### Erro ao enviar mensagem, tente novamente ###")
-'''

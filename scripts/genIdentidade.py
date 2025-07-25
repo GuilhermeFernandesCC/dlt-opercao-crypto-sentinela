@@ -1,5 +1,6 @@
 import base64
 import json
+import time
 from cryptography.hazmat.primitives.asymmetric import rsa, ec
 from cryptography.hazmat.primitives import serialization
 import paho.mqtt.client as mqtt
@@ -61,6 +62,7 @@ def publicar_identidade_mqtt(id_unidade, pub_rsa_b64, pub_ecdsa_b64):
     cliente.connect(BROKER_ADDRESS, 1883, 60)
     cliente.loop_start()
     cliente.publish(topico, json.dumps(mensagem),retain=True)
+    time.sleep(1)
     cliente.loop_stop()
     cliente.disconnect()
 

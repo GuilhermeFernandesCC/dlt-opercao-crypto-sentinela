@@ -4,6 +4,7 @@ import base64
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import ec, rsa, padding
+from cryptography.hazmat.primitives import serialization
 
 def sha256_hash(msg_bytes):
     """Calcula o hash SHA-256 da mensagem."""
@@ -14,6 +15,14 @@ def gerar_chave_aes():
     """Gera chave de sessão AES de 256 bits."""
     return os.urandom(32)
 
+
+def carregar_chave_publica_b64(b64_str):
+    key_bytes = base64.b64decode(b64_str)
+    return serialization.load_der_public_key(key_bytes)
+
+def carregar_chave_privada_b64(b64_str):
+    key_bytes = base64.b64decode(b64_str)
+    return serialization.load_der_private_key(key_bytes, password=None)
 
 def criptografar_aes_gcm(chave_aes, mensagem_bytes):
     """Criptografa usando AES-256 GCM."""
