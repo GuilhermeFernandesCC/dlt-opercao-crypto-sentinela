@@ -24,7 +24,7 @@ def enviar_echo():
     print("Mensagem Echo publicada e cliente desconectado.")
 
 def get_public_key(destinatario):
-    uu.atualizar_chaves_confiadas()
+    #uu.atualizar_chaves_confiadas()
     chaves_confiadas = {}
     with open('./scripts/chaves_confiadas.json','r') as f:
         chaves_confiadas= json.load(f)
@@ -71,6 +71,10 @@ def enviar_mensagem_segura(destinatario,conteudo):
 print('### Mensagem Segura ###')
 dest = input('id destino: ')
 msg = input('Mensagem: ')
+if dest=="" and msg=="":
+    dest='ut-foxtrot'
+    msg='teste'
+    print('mensagem padrão')
 enviar_mensagem_segura(dest,msg)
 try:
     
