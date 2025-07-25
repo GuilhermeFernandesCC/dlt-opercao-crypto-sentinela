@@ -4,7 +4,7 @@ import time
 from cryptography.hazmat.primitives.asymmetric import rsa, ec
 from cryptography.hazmat.primitives import serialization
 import paho.mqtt.client as mqtt
-import formato,exportacaoKeys
+import exportacaoKeys
 
 #Estabelecimento de Identidade (IFF)
 #1 Geração de par de chaves assimétricas

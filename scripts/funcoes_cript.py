@@ -78,6 +78,7 @@ def criar_mensagem_segura(payload, chave_rsa_pub_destinatario, chave_ecdsa_priv_
 
     # 6. Montar mensagem JSON com todos os campos codificados em Base64
     mensagem_segura = {
+        "remetente" : "UT-Foxtrot",
         "ciphertext_b64": base64.b64encode(ciphertext).decode(),
         "tag_autenticacao_b64": base64.b64encode(tag).decode(),
         "nonce_b64": base64.b64encode(nonce).decode(),

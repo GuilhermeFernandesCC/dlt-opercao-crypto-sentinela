@@ -1,17 +1,17 @@
 {
-    "ut-alfa": {
-      "chave_publica_rsa": "MIIC...IDAQAB",
-      "chave_publica_ecdsa": "MCowB...3N2ZQ=",
-      "ultima_atualizacao": "2023-10-27T09:30:00Z"
-    },
-    "ut-bravo": {
-      "chave_publica_rsa": "MIIC...IDAQAB", 
-      "chave_publica_ecdsa": "MCowB...3N2ZQ=",
-      "ultima_atualizacao": "2023-10-27T09:45:00Z"
-    },
-    "ut-foxtrot": {
-      "chave_publica_rsa": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwJ/l00dOWfQujDhd6uMJsa64jDsGAcBeKdgwwWCSd3pYQzEbVTkSFcENRoLHw7R4ZTO1N2fYVqV143khGMY/hghrZjFue9Jrgp+aO8zhXHCl7fex06jkhfDMJ8n8Zv8EfwtQPn7myp+7wP2etooY8rC4Ai8KyGjikXTRsdLBQfDVGNIk/xEALbMwgkCPKUygMrs2AuInx3drQaLwut9vL5c1a1jVY2AN/kUnTzwfo4KS+3SH0tAKdjZo6Z5xTmBT3GOSSdBk9h5t5HC6unOaP/dmPfm6czVzjMaCTEV1h1k3LCGfLf0lfqUDkfrUD0Ffuq14+e5KlzprwLRfE7UuHQIDAQAB", 
-      "chave_publica_ecdsa": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEkI6s4EsLH15jIXN62vtPtRW3aYwsnydHJPldDWGkiE3Lynpxogwoo1NMPMvJbaFtiQ+16t90qCd3mc+L8oQXVQ==",
-      "ultima_atualizacao": "2023-10-27T09:45:00Z"
-    }
+  "ut-alfa": {
+    "chave_publica_rsa": "MIIC...IDAQAB",
+    "chave_publica_ecdsa": "MCowB...3N2ZQ=",
+    "ultima_atualizacao": "2023-10-27T09:30:00Z"
+  },
+  "ut-bravo": {
+    "chave_publica_rsa": "MIIC...IDAQAB",
+    "chave_publica_ecdsa": "MCowB...3N2ZQ=",
+    "ultima_atualizacao": "2023-10-27T09:45:00Z"
+  },
+  "ut-foxtrot": {
+    "chave_publica_rsa": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwJ/l00dOWfQujDhd6uMJsa64jDsGAcBeKdgwwWCSd3pYQzEbVTkSFcENRoLHw7R4ZTO1N2fYVqV143khGMY/hghrZjFue9Jrgp+aO8zhXHCl7fex06jkhfDMJ8n8Zv8EfwtQPn7myp+7wP2etooY8rC4Ai8KyGjikXTRsdLBQfDVGNIk/xEALbMwgkCPKUygMrs2AuInx3drQaLwut9vL5c1a1jVY2AN/kUnTzwfo4KS+3SH0tAKdjZo6Z5xTmBT3GOSSdBk9h5t5HC6unOaP/dmPfm6czVzjMaCTEV1h1k3LCGfLf0lfqUDkfrUD0Ffuq14+e5KlzprwLRfE7UuHQIDAQAB",
+    "chave_publica_ecdsa": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEkI6s4EsLH15jIXN62vtPtRW3aYwsnydHJPldDWGkiE3Lynpxogwoo1NMPMvJbaFtiQ+16t90qCd3mc+L8oQXVQ==",
+    "ultima_atualizacao": "2023-10-27T09:45:00Z"
   }
+}

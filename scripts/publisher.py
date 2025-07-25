@@ -1,9 +1,8 @@
 import paho.mqtt.client as mqtt
-import hashlib
-import base64
 import time
 import json
 import funcoes_cript as fc
+import update_unidades as uu
 
 def enviar_echo():
     BROKER_ADDRESS = "test.mosquitto.org"
@@ -25,6 +24,7 @@ def enviar_echo():
     print("Mensagem Echo publicada e cliente desconectado.")
 
 def get_public_key(destinatario):
+    uu.atualizar_chaves_confiadas()
     chaves_confiadas = {}
     with open('./scripts/chaves_confiadas.json','r') as f:
         chaves_confiadas= json.load(f)
