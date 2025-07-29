@@ -1,9 +1,6 @@
 import base64
 import json
-import os
-import datetime
-import time
-import traceback
+import revogador
 import funcoes_cript as fc
 from cryptography.hazmat.primitives.asymmetric import rsa, padding, ec
 from cryptography.hazmat.primitives import hashes, serialization
@@ -100,10 +97,18 @@ def on_message(client, userdata, msg):
 
     except Exception as e:
         print(f"Falha na validação: {e}")
-        traceback.print_exc()
-        # Aqui você pode montar uma resposta para o oráculo informando a falha
-        # enviar_mensagem_para_oraculo("Falha de verificação em mensagem recebida", detalhes)
+        with open("./scripts/chave_ut_foxtrot.json") as f:
+            identidade = json.load(f)
 
+        ecdsa_priv_b64 = identidade["ecdsa"]["private_key"]
+        chave_priv_ecdsa = fc.carregar_chave_privada_b64(ecdsa_priv_b64)
+
+        revogador.emitir_e_publicar_revogacao(
+            unidade_revogada="ut-charlie",
+            remetente_id="ut-foxtrot",
+            chave_privada_ecdsa=chave_priv_ecdsa
+        )
+        
 # Conectar e escutar tópico
 def iniciar_listener():
     print(f" Iniciando listener seguro para {ID_UNIDADE} no tópico: {TOPICO_ESPECIFICO}")
