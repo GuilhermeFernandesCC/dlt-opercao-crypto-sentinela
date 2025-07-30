@@ -62,9 +62,9 @@ def enviar_mensagem_segura(destinatario,conteudo):
     
     client = mqtt.Client()
     client.connect(BROKER_ADDRESS, 1883, 60)
+    time.sleep(1)
     client.loop_start()
     client.publish(TOPIC, payload=json.dumps(mensagem_segura))
-    time.sleep(1) # Garantir Publicação
     client.loop_stop()
     client.disconnect()
 
@@ -75,9 +75,11 @@ if dest=="" and msg=="":
     dest='ut-foxtrot'
     msg='teste'
     print('mensagem padrão')
-enviar_mensagem_segura(dest,msg)
-try:
-    
-    print("### Mensagem Enviada ###")
-except Exception as e:
-    print("### Erro ao enviar mensagem, tente novamente ###")
+elif dest=="oraculo" and msg=="echo":
+    enviar_echo()
+else:
+    try:    
+        enviar_mensagem_segura(dest,msg)
+        print("### Mensagem Enviada ###")
+    except Exception as e:
+        print("### Erro ao enviar mensagem, tente novamente ###")
